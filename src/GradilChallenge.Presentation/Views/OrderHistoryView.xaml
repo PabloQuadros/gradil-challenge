@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="440"/>
+            <ColumnDefinition Width="500"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -38,9 +38,12 @@
                     <DataGridTextColumn Header="Altura"
                          Binding="{Binding Quote.Height.Name, Mode=OneWay}"
                          Width="80"/>
+                    <DataGridCheckBoxColumn Header="Fechada"
+                         Binding="{Binding Quote.IsClosed, Mode=OneWay}"
+                         Width="70"/>
                     <DataGridTextColumn Header="Cor"
                          Binding="{Binding Quote.Color.Name, Mode=OneWay}"
-                        Width="*"/>
+                         Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

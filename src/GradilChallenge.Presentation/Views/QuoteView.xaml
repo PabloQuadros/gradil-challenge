@@ -20,6 +20,9 @@
             <ComboBox ItemsSource="{Binding AvailableColors}" DisplayMemberPath="Name"
                       SelectedItem="{Binding SelectedColor}" Margin="0,0,0,16"/>
 
+            <CheckBox Content="Cerca fechada"
+                IsChecked="{Binding IsClosed}" Margin="0,0,0,16"/>
+
             <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
                 <Button Content="Calcular Cerca" Command="{Binding CalculateCommand}"
                         Padding="12,6" Margin="0,0,8,0"/>

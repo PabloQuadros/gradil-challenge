@@ -44,8 +44,11 @@ public sealed class FenceDrawingBuilder
             x += PanelWidth;
         }
 
-        AddPost(shapes, x, postHeightPx);
-        x += PostWidth;
+        if(!quote.IsClosed || isRepresentative)
+        {
+            AddPost(shapes, x, postHeightPx);
+            x += PostWidth;
+        }
 
         if (isRepresentative)
         {

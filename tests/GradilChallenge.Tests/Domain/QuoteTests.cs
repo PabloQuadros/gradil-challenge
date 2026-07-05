@@ -71,7 +71,7 @@ public class QuoteTests
     [Fact]
     public void TryCreate_FailsWithoutLength()
     {
-        var ok = Quote.TryCreate(null, FenceHeight.Height103, FenceColor.NoPaint, null, out var quote, out var error);
+        var ok = Quote.TryCreate(null, FenceHeight.Height103, FenceColor.NoPaint, null, false, out var quote, out var error);
 
         Assert.False(ok);
         Assert.Null(quote);
@@ -81,7 +81,7 @@ public class QuoteTests
     [Fact]
     public void TryCreate_FailsWithoutHeight()
     {
-        var ok = Quote.TryCreate(Length.FromMeters(5), null, FenceColor.NoPaint, null, out _, out var error);
+        var ok = Quote.TryCreate(Length.FromMeters(5), null, FenceColor.NoPaint, null, false, out _, out var error);
 
         Assert.False(ok);
         Assert.Equal("quote.height.required", error!.Code);
@@ -90,9 +90,46 @@ public class QuoteTests
     [Fact]
     public void TryCreate_FailsWithoutColor()
     {
-        var ok = Quote.TryCreate(Length.FromMeters(5), FenceHeight.Height103, null, null, out _, out var error);
+        var ok = Quote.TryCreate(Length.FromMeters(5), FenceHeight.Height103, null, null, false, out _, out var error);
 
         Assert.False(ok);
         Assert.Equal("quote.color.required", error!.Code);
+    }
+
+    [Fact]
+    public void Closed_fence_has_one_less_post_than_open()
+    {
+        var open = Quote.Create(Length.FromMeters(10), FenceHeight.Height103, FenceColor.White, isClosed: false);
+        var closed = Quote.Create(Length.FromMeters(10), FenceHeight.Height103, FenceColor.White, isClosed: true);
+
+        Assert.Equal(open.PostCount - 1, closed.PostCount);
+        Assert.Equal(closed.PostCount * FenceHeight.Height103.FastenersPerPost, closed.FastenerCount);
+        Assert.Equal(closed.PostCount * 4, closed.ScrewCount);
+    }
+
+    [Theory]
+    [InlineData(2.5)] 
+    [InlineData(5.0)]  
+    public void Closed_fence_requires_at_least_three_panels(double meters)
+    {
+        var ok = Quote.TryCreate(Length.FromMeters(meters), FenceHeight.Height103,
+                                 FenceColor.White, panel: null, isClosed: true,
+                                 out var quote, out var error);
+
+        Assert.False(ok);
+        Assert.Null(quote);
+        Assert.Equal("quote.closed.minPanels", error!.Code);
+    }
+
+    [Fact]
+    public void Closed_fence_with_exactly_three_panels_is_valid()
+    {
+        var ok = Quote.TryCreate(Length.FromMeters(7.5), FenceHeight.Height103,
+                                 FenceColor.White, panel: null, isClosed: true,
+                                 out var quote, out var error);
+
+        Assert.True(ok);
+        Assert.Null(error);
+        Assert.Equal(3, quote!.PostCount);
     }
 }

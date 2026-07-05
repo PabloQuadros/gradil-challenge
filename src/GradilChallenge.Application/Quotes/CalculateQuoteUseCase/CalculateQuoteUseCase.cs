@@ -7,7 +7,7 @@ namespace GradilChallenge.Application.Quotes.CalculateQuoteUseCase;
 
 public sealed class CalculateQuoteUseCase : ICalculateQuoteUseCase
 {
-    public Task<Result<Quote>> ExecuteAsync(double desiredLengthInMeters, int heightId, int colorId)
+    public Task<Result<Quote>> ExecuteAsync(double desiredLengthInMeters, int heightId, int colorId, bool isClosed)
     {
         if (!Length.TryCreate(desiredLengthInMeters, out var desiredLength, out var lengthError))
             return Task.FromResult(Result<Quote>.Failure(lengthError.Message, lengthError.Code));
@@ -18,7 +18,7 @@ public sealed class CalculateQuoteUseCase : ICalculateQuoteUseCase
         if (!FenceColor.TryFromId(colorId, out var color, out var colorError))
             return Task.FromResult(Result<Quote>.Failure(colorError.Message, colorError.Code));
 
-        if (!Quote.TryCreate(desiredLength, height, color, panel: null, out var quote, out var quoteError))
+        if (!Quote.TryCreate(desiredLength, height, color, panel: null, isClosed, out var quote, out var quoteError))
             return Task.FromResult(Result<Quote>.Failure(quoteError.Message, quoteError.Code));
 
         return Task.FromResult(Result<Quote>.Success(quote));

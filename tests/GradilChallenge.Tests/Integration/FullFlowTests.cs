@@ -61,7 +61,7 @@ public sealed class FullFlowTests : IAsyncLifetime, IDisposable
         var history = scope.ServiceProvider.GetRequiredService<IGetOrderHistoryUseCase>();
 
         // 1. Calculate the quote (12m, 1.53m, green)
-        var quoteResult = await calculate.ExecuteAsync(12, FenceHeight.Height153.Id, FenceColor.Green.Id);
+        var quoteResult = await calculate.ExecuteAsync(12, FenceHeight.Height153.Id, FenceColor.Green.Id, false);
         Assert.True(quoteResult.IsSuccess);
         Assert.Equal(5, quoteResult.Value.PanelCount); // ceil(12/2.5)
         Assert.Equal(12.5, quoteResult.Value.SoldLength.Meters, precision: 2);
@@ -85,7 +85,7 @@ public sealed class FullFlowTests : IAsyncLifetime, IDisposable
         var calculate = scope.ServiceProvider.GetRequiredService<ICalculateQuoteUseCase>();
         var history = scope.ServiceProvider.GetRequiredService<IGetOrderHistoryUseCase>();
 
-        var result = await calculate.ExecuteAsync(-3, FenceHeight.Height103.Id, FenceColor.NoPaint.Id);
+        var result = await calculate.ExecuteAsync(-3, FenceHeight.Height103.Id, FenceColor.NoPaint.Id, false);
 
         Assert.False(result.IsSuccess);
         Assert.Empty(await history.ExecuteAsync());

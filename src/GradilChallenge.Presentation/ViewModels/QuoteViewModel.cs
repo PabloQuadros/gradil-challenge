@@ -43,6 +43,13 @@ public sealed class QuoteViewModel : ViewModelBase
         set => SetField(ref _selectedColor, value);
     }
 
+    private bool _isClosed;
+    public bool IsClosed
+    {
+        get => _isClosed;
+        set => SetField(ref _isClosed, value);
+    }
+
     // Quote State Properties
     private Quote? _quote;
     public Quote? Quote
@@ -108,7 +115,7 @@ public sealed class QuoteViewModel : ViewModelBase
         }
 
         var result = await _calculateQuoteUseCase.ExecuteAsync(
-            desiredLengthInMeters, SelectedHeight.Id, SelectedColor.Id);
+            desiredLengthInMeters, SelectedHeight.Id, SelectedColor.Id, IsClosed);
 
         if (result.IsSuccess)
         {

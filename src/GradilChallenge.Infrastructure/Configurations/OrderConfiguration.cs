@@ -55,6 +55,7 @@ public sealed class OrderConfiguration : IEntityTypeConfiguration<Order>
             quoteBuilder.Property(quote => quote.PostCount).HasColumnName("PostCount");
             quoteBuilder.Property(quote => quote.FastenerCount).HasColumnName("FastenerCount");
             quoteBuilder.Property(quote => quote.ScrewCount).HasColumnName("ScrewCount");
+            quoteBuilder.Property(quote => quote.IsClosed).HasColumnName("IsClosed").IsRequired();
         });
 
         builder.Navigation(order => order.Quote).IsRequired();

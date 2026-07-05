@@ -10,7 +10,7 @@ public class CalculateQuoteUseCaseTests
     [Fact]
     public async Task ExecuteAsync_ReturnsQuoteForValidInputs()
     {
-        var result = await _useCase.ExecuteAsync(9, FenceHeight.Height153.Id, FenceColor.Green.Id);
+        var result = await _useCase.ExecuteAsync(9, FenceHeight.Height153.Id, FenceColor.Green.Id, false);
 
         Assert.True(result.IsSuccess);
         Assert.Equal(4, result.Value.PanelCount);
@@ -23,7 +23,7 @@ public class CalculateQuoteUseCaseTests
     [InlineData(-5)]
     public async Task ExecuteAsync_FailsForInvalidLength(double meters)
     {
-        var result = await _useCase.ExecuteAsync(meters, FenceHeight.Height103.Id, FenceColor.NoPaint.Id);
+        var result = await _useCase.ExecuteAsync(meters, FenceHeight.Height103.Id, FenceColor.NoPaint.Id, false);
 
         Assert.False(result.IsSuccess);
         Assert.Equal("length.invalid", result.ErrorCode);
@@ -33,7 +33,7 @@ public class CalculateQuoteUseCaseTests
     [Fact]
     public async Task ExecuteAsync_FailsForInvalidHeight()
     {
-        var result = await _useCase.ExecuteAsync(10, heightId: 99, FenceColor.NoPaint.Id);
+        var result = await _useCase.ExecuteAsync(10, heightId: 99, FenceColor.NoPaint.Id, false);
 
         Assert.False(result.IsSuccess);
         Assert.Equal("fenceheight.invalid", result.ErrorCode);
@@ -42,7 +42,7 @@ public class CalculateQuoteUseCaseTests
     [Fact]
     public async Task ExecuteAsync_FailsForInvalidColor()
     {
-        var result = await _useCase.ExecuteAsync(10, FenceHeight.Height103.Id, colorId: 99);
+        var result = await _useCase.ExecuteAsync(10, FenceHeight.Height103.Id, colorId: 99, false);
 
         Assert.False(result.IsSuccess);
         Assert.Equal("fencecolor.invalid", result.ErrorCode);
