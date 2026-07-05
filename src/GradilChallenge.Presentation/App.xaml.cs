@@ -14,7 +14,7 @@ public partial class App : System.Windows.Application
 {
     private ServiceProvider? _serviceProvider;
 
-    protected override async void OnStartup(StartupEventArgs e)
+    protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
 
@@ -32,13 +32,13 @@ public partial class App : System.Windows.Application
 
             _serviceProvider = services.BuildServiceProvider();
 
-            await using (var scope = _serviceProvider.CreateAsyncScope())
+            using (var scope = _serviceProvider.CreateAsyncScope())
             {
                 var dbContextFactory = scope.ServiceProvider
                     .GetRequiredService<IDbContextFactory<GradilDbContext>>();
 
-                await using var dbContext = await dbContextFactory.CreateDbContextAsync();
-                await dbContext.Database.EnsureCreatedAsync();
+                using var dbContext = dbContextFactory.CreateDbContext();
+                dbContext.Database.EnsureCreatedAsync();
             }
 
             var shellWindow = _serviceProvider.GetRequiredService<ShellWindow>();
