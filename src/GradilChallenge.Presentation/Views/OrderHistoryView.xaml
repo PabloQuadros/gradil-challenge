@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="GradilChallenge.Presentation.Views.OrderHistoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="440"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Margin="0,0,16,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Pedidos confirmados:" FontWeight="Bold" Margin="0,0,0,4"/>
+
+            <TextBlock Grid.Row="1" Text="Sem pedidos confirmados ainda." Foreground="Gray" Margin="0,0,0,8"
+               Visibility="{Binding HasOrders, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
+
+            <DataGrid Grid.Row="2" ItemsSource="{Binding Orders}"
+              SelectedItem="{Binding SelectedOrder}"
+              AutoGenerateColumns="False" IsReadOnly="True"
+              CanUserAddRows="False" HeadersVisibility="Column"
+              SelectionMode="Single"
+              AlternatingRowBackground="#F5F7FA"
+              GridLinesVisibility="Horizontal"
+              HorizontalGridLinesBrush="#E0E0E0"
+              RowHeight="28">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Data"
+                         Binding="{Binding ConfirmedAtLocal, Mode=OneWay, StringFormat={}{0:dd/MM/yyyy HH:mm}}"
+                         Width="120"/>
+                    <DataGridTextColumn Header="Comprimento"
+                         Binding="{Binding Quote.DesiredLength, Mode=OneWay}"
+                         Width="100"/>
+                    <DataGridTextColumn Header="Altura"
+                         Binding="{Binding Quote.Height.Name, Mode=OneWay}"
+                         Width="80"/>
+                    <DataGridTextColumn Header="Cor"
+                         Binding="{Binding Quote.Color.Name, Mode=OneWay}"
+                        Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Column="1" xmlns:drawing="clr-namespace:GradilChallenge.Presentation.Models.Drawing">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Esboço da Cerca:" FontWeight="Bold" Margin="0,0,0,4"/>
+
+            <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1"
+            Height="280" ClipToBounds="True">
+                <Grid>
+                    <Grid Visibility="{Binding HasSelectedOrder, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="220"/>
+                            <RowDefinition Height="4"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="#6eb9ff"/>
+                        <Border Grid.Row="1" Background="#8B7355"/>
+                        <Border Grid.Row="2" Background="White"/>
+                    </Grid>
+
+                    <ItemsControl ItemsSource="{Binding FenceDrawing}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemContainerStyle>
+                            <Style TargetType="ContentPresenter">
+                                <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                                <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+
+                        <ItemsControl.Resources>
+                            <DataTemplate DataType="{x:Type drawing:RectangleShape}">
+                                <Rectangle Width="{Binding Width}" Height="{Binding Height}"
+                                   Fill="{Binding Fill}" Stroke="{Binding Stroke}"
+                                   StrokeThickness="1"/>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type drawing:LineShape}">
+                                <Line X1="0" Y1="0" X2="{Binding LengthX}" Y2="{Binding LengthY}"
+                              Stroke="{Binding Stroke}" StrokeThickness="{Binding Thickness}"/>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type drawing:TextShape}">
+                                <TextBlock Text="{Binding Text}" FontSize="{Binding FontSize}"
+                                   Foreground="{Binding Foreground}"/>
+                            </DataTemplate>
+                        </ItemsControl.Resources>
+                    </ItemsControl>
+
+                    <TextBlock Text="Selecione um pedido à esquerda para ver o esboço da cerca."
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       TextWrapping="Wrap" TextAlignment="Center" Margin="20"
+                       Foreground="#606060"
+                       Visibility="{Binding HasSelectedOrder, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
