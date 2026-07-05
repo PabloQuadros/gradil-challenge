@@ -8,4 +8,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GradilChallenge.Application\GradilChallenge.Application.csproj" />
+    <ProjectReference Include="..\GradilChallenge.Domain\GradilChallenge.Domain.csproj" />
+    <ProjectReference Include="..\GradilChallenge.Infrastructure\GradilChallenge.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

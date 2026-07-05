@@ -1,6 +1,7 @@
-﻿using GradilChallenge.Domain.Entities;
+﻿using GradilChallenge.Application.Common;
+using GradilChallenge.Domain.Entities;
 
-namespace GradilChallenge.Application.Common.Quotes.CalculateQuoteUseCase;
+namespace GradilChallenge.Application.Quotes.CalculateQuoteUseCase;
 
 public interface ICalculateQuoteUseCase
 {

@@ -1,9 +1,9 @@
-﻿
+﻿using GradilChallenge.Application.Common;
 using GradilChallenge.Domain.Entities;
 using GradilChallenge.Domain.Enums;
 using GradilChallenge.Domain.ValueObjects;
 
-namespace GradilChallenge.Application.Common.Quotes.CalculateQuoteUseCase;
+namespace GradilChallenge.Application.Quotes.CalculateQuoteUseCase;
 
 public sealed class CalculateQuoteUseCase : ICalculateQuoteUseCase
 {

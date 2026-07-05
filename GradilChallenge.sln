@@ -3,12 +3,47 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradilChallenge.Domain", "src\GradilChallenge.Domain\GradilChallenge.Domain.csproj", "{BBB9A57F-7DD5-434A-9421-0157AE899B32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradilChallenge.Application", "src\GradilChallenge.Application\GradilChallenge.Application.csproj", "{46F2F499-0274-4376-B0E4-382E4301275E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradilChallenge.Infrastructure", "src\GradilChallenge.Infrastructure\GradilChallenge.Infrastructure.csproj", "{5A404B01-E9E7-40E1-B8D6-E097873F1DA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradilChallenge.Presentation", "src\GradilChallenge.Presentation\GradilChallenge.Presentation.csproj", "{4A566BAD-0C7E-49B0-B4B4-C520C9C6BDD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradilChallenge.Tests", "tests\GradilChallenge.Tests\GradilChallenge.Tests.csproj", "{13742A2A-0003-4424-BFEF-C623D200FE29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBB9A57F-7DD5-434A-9421-0157AE899B32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBB9A57F-7DD5-434A-9421-0157AE899B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBB9A57F-7DD5-434A-9421-0157AE899B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBB9A57F-7DD5-434A-9421-0157AE899B32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46F2F499-0274-4376-B0E4-382E4301275E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46F2F499-0274-4376-B0E4-382E4301275E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46F2F499-0274-4376-B0E4-382E4301275E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46F2F499-0274-4376-B0E4-382E4301275E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A404B01-E9E7-40E1-B8D6-E097873F1DA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A404B01-E9E7-40E1-B8D6-E097873F1DA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A404B01-E9E7-40E1-B8D6-E097873F1DA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A404B01-E9E7-40E1-B8D6-E097873F1DA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A566BAD-0C7E-49B0-B4B4-C520C9C6BDD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A566BAD-0C7E-49B0-B4B4-C520C9C6BDD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A566BAD-0C7E-49B0-B4B4-C520C9C6BDD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A566BAD-0C7E-49B0-B4B4-C520C9C6BDD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13742A2A-0003-4424-BFEF-C623D200FE29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13742A2A-0003-4424-BFEF-C623D200FE29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13742A2A-0003-4424-BFEF-C623D200FE29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13742A2A-0003-4424-BFEF-C623D200FE29}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7636838D-278F-4D8D-9383-9D8CE19A6F69}
 	EndGlobalSection
 EndGlobal
